@@ -44,14 +44,7 @@ class Dashboard extends React.Component{
     var inStock =this.state.stock.map((data,index)=> <DisplayItem key={index} data={data} addToCart = {this.addToCart}/>)
   	return(
   		<div className="content-container ">
-        <div className="input-group">
-          <div className="input-group__item">
-            <input className="text-input" type="text" onChange={this.onInputChange}/>
-          </div>
-          <div className="input-group__item">
-            <button className="button " onClick={this.handleOnClick}>Search</button></div>
-          </div>
-		        <p className="button display--link">{this.state.wait}</p>
+        
             <div className="items-display " >
             {inStock}
   		       </div>
