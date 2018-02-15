@@ -51,7 +51,7 @@ module.exports = function(app,db) {
 
   app.post('/checkOut',(req,res)=>{
     console.log("in checkOut", req.body.total);
-    Insta.setKeys(keys.API_KEY, keys.AUTH_TOKEN);
+    Insta.setKeys(process.env.API_KEY, process.env.AUTH_TOKEN);
 
     var data = new Insta.PaymentData();
 
