@@ -15,7 +15,6 @@ class Dashboard extends React.Component{
       method: 'get',
       url: '/getItemsFromCart'
     }).then((response)=>{
-
         response.data.forEach((data,index)=>{
         totalAdd=totalAdd+parseInt(data.cost);
       })
@@ -28,8 +27,6 @@ class Dashboard extends React.Component{
   }
 
   removeFromCart = (id,cost) => {
-    console.log("remove ", id);
-    console.log(id , " from Dashboard");
     var newTotal = this.state.total-cost;
 
     this.setState(()=>({total:newTotal}))
@@ -56,7 +53,6 @@ class Dashboard extends React.Component{
         total:this.state.total
       }
     }).then((response)=>{
-        console.log("success fully paid", response.data);
         this.setState(()=>({url:response.data.payment_request.longurl}))
         })
         .catch(function(err){
@@ -65,12 +61,11 @@ class Dashboard extends React.Component{
   }
   render(){
     var inCart =this.state.cart.map((data,index)=>{
-    //  this.state.total=this.state.total+ parseInt(data.cost)
       return(
     <div className="cart-items-display">
     <p key={index}>{data.item} </p>
     <p>{data.cost}</p>
-    <button onClick={()=>this.removeFromCart(data._id,data.cost)} >Remove</button>
+    <button className="button-other" onClick={()=>this.removeFromCart(data._id,data.cost)} >remove</button>
     </div>)}
   )
 
@@ -83,16 +78,14 @@ class Dashboard extends React.Component{
         </div>
       {inCart}
       <p className="total">Total: {this.state.total}</p>
-      <button onClick={this.checkOut}> Check Out</button>
-
-
+      <button className="button align-button" onClick={this.checkOut}> Check Out</button>
       </div>
 
     );
   }
   else{
     return (
-        <a  href={this.state.url}>Please click here to complete the payment</a>
+        <a  className="myLink" href={this.state.url}>Please click here to complete the payment</a>
     )
   }
   }

@@ -44,7 +44,6 @@ class Dashboard extends React.Component{
     var inStock =this.state.stock.map((data,index)=> <DisplayItem key={index} data={data} addToCart = {this.addToCart}/>)
   	return(
   		<div className="content-container ">
-        
             <div className="items-display " >
             {inStock}
   		       </div>

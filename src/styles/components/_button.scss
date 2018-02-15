@@ -1,5 +1,5 @@
 .button{
-  background:$blue;
+  background:$dark-blue;
   border: none;
   color:white;
   font-size: $font-size-large;
@@ -9,9 +9,24 @@
   text-decoration: none;
 }
 
+.button-other{
+  background:#cccccc;
+  border: none;
+  color:black;
+  font-size: $m-size;
+  font-weight:300;
+  padding: $s-size;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.align-button{
+    margin-left: 45%;
+}
+
+
 .button--link{
   background:none;
-
 }
 
 .display--link{
@@ -19,5 +34,5 @@
   color: $dark-blue;
   font-size: $font-size-large;
   font-weight:300;
-  padding: 0 $s-size;	
+  padding: 0 $s-size;
 }
