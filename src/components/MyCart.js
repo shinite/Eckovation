@@ -6,7 +6,7 @@ class Dashboard extends React.Component{
   state = {
     cart: [] ,
     total:0,
-    err:null
+    url:null
   }
 
   componentWillMount(){
@@ -28,8 +28,6 @@ class Dashboard extends React.Component{
   }
 
   removeFromCart = (id,cost) => {
-
-
     console.log("remove ", id);
     console.log(id , " from Dashboard");
     var newTotal = this.state.total-cost;
@@ -49,6 +47,22 @@ class Dashboard extends React.Component{
           console.log(err, 'error!! try again');
         });
   }
+
+  checkOut = () =>{
+    axios({
+      method: 'post',
+      url: '/checkOut',
+      data:{
+        total:this.state.total
+      }
+    }).then((response)=>{
+        console.log("success fully paid", response.data);
+        this.setState(()=>({url:response.data.payment_request.longurl}))
+        })
+        .catch(function(err){
+          console.log(err, 'error!! try again');
+        });
+  }
   render(){
     var inCart =this.state.cart.map((data,index)=>{
     //  this.state.total=this.state.total+ parseInt(data.cost)
@@ -60,6 +74,8 @@ class Dashboard extends React.Component{
     </div>)}
   )
 
+  if(this.state.url == null){
+
     return(
       <div>
         <div className="cart-items-display">
@@ -67,8 +83,18 @@ class Dashboard extends React.Component{
         </div>
       {inCart}
       <p className="total">Total: {this.state.total}</p>
+      <button onClick={this.checkOut}> Check Out</button>
+
+
       </div>
+
     );
+  }
+  else{
+    return (
+        <a  href={this.state.url}>Please click here to complete the payment</a>
+    )
+  }
   }
 
 }

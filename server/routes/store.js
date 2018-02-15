@@ -1,5 +1,6 @@
-
+var Insta = require('instamojo-nodejs');
 var Store = require('../model/myStoreSchema')
+var keys= require('../config/keys')
 
 module.exports = function(app,db) {
 
@@ -32,7 +33,7 @@ module.exports = function(app,db) {
   })
 
   app.post('/removeFromCart',(req,res)=>{
-    
+
     console.log("in get Items", req.body);
     db.collection("myCart").remove(req.body).then(function(){
       console.log("success removing");
@@ -45,10 +46,31 @@ module.exports = function(app,db) {
             console.log(result);
            res.json(result)
         })
-
-
   })
 
+
+  app.post('/checkOut',(req,res)=>{
+    console.log("in checkOut", req.body.total);
+    Insta.setKeys(keys.API_KEY, keys.AUTH_TOKEN);
+
+    var data = new Insta.PaymentData();
+
+      data.purpose = "App";            // REQUIRED
+      data.amount = req.body.total;                  // REQUIRED
+      data.setRedirectUrl('https://ecknovation.herokuapp.com/cart/payment');
+
+      Insta.createPayment(data, function(error, response) {
+        if (error) {
+          // some error
+        } else {
+          // Payment redirection link at response.payment_request.longurl
+          console.log(response);
+        //  res.redirect('http://mydomain.com'+req.url)
+          res.send(response)
+        }
+      });
+
+  })
 
 
 }
