@@ -1,6 +1,6 @@
 var Insta = require('instamojo-nodejs');
 var Store = require('../model/myStoreSchema')
-var keys= require('../config/keys')
+//var keys= require('../config/keys')
 
 module.exports = function(app,db) {
 
