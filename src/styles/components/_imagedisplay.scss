@@ -1,10 +1,23 @@
-.images-display{
+.items-display{
  display:flex;
- justify-content: space-between;
- align-items: center;
- flex-wrap:wrap;	
+justify-content: space-between;
+align-items: center;
+flex-wrap:wrap;
+margin: 0px 30px 0px 30px;
 }
 
-.images-edit{
- margin: $s-size $s-size;
+.item-display{
+  border: 1px solid #cacccd;
+  margin: $s-size $s-size;
+  padding: $m-size $m-size;
+
+}
+
+.cart-items-display{
+ display:flex;
+justify-content: space-between  ;
+align-items: center;
+flex-wrap:wrap;
+margin: 20px 30px 0px 30%;
+width: 40%;
 }

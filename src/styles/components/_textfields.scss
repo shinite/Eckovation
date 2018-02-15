@@ -1,0 +1,27 @@
+
+.text-heading{
+  height: 20px;
+  font-size: $l-size;
+  font-weight: 800;
+  color:$dark-blue;
+}
+
+.text-highlighted{
+  height: 20px;
+  font-size: $l-size;
+  font-weight: 800;
+  color: green;
+}
+
+.text-normal{
+  height: 20px;
+  font-size: $m-size;
+  font-weight: 300;
+}
+
+.total{
+  align-items: center;
+  font-weight: 600 ;
+  font-size: $l-size;
+  margin-left: 45%;
+}

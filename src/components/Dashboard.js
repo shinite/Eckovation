@@ -1,37 +1,47 @@
 import React from 'react';
 import axios from 'axios';
+import DisplayItem from './DisplayItem';
 
 class Dashboard extends React.Component{
 
   state = {
-    searchInput: null,
+    stock: [] ,
     wait:null,
     err:null
   }
 
-  onInputChange = (e) => {
-    const searchInput = e.target.value.toLowerCase();
-    this.setState(()=>({searchInput}))
+  addToCart = (id,item,cost) => {
+    console.log(id , " from Dashboard");
+    axios({
+      method: 'post',
+      url: '/addToCart',
+      data : {
+        "_id" :id,
+        "item":item,
+        "cost":cost
+      }
+    }).then((response)=>{
+        })
+        .catch(function(err){
+          console.log(err, 'error!! try again');
+        });
   }
 
-  handleOnClick = (e) =>{
-  	e.preventDefault();
-	   this.setState(()=>({wait:"please wait while images are getting saved"}))
-  		axios({
-  		  method: 'post',
-  		  url: '/search',
-  		  data: {
-  		    input : this.state.searchInput
-  		  }
-  		}).then((response)=>{
-			     this.setState(()=>({wait:response.data}))
-  		    })
-  		    .catch(function(err){
-  		      console.log(err, 'error!! try again');
-  		    });
+
+  componentWillMount(){
+    axios({
+      method: 'get',
+      url: '/getItemsFromStore'
+    }).then((response)=>{
+      this.setState(()=>({stock:response.data}))
+        })
+        .catch(function(err){
+          console.log(err, 'error!! try again');
+        });
   }
 
   render(){
+    var inStock =this.state.stock.map((data,index)=> <DisplayItem key={index} data={data} addToCart = {this.addToCart}/>)
   	return(
   		<div className="content-container ">
         <div className="input-group">
@@ -42,7 +52,10 @@ class Dashboard extends React.Component{
             <button className="button " onClick={this.handleOnClick}>Search</button></div>
           </div>
 		        <p className="button display--link">{this.state.wait}</p>
-  		</div>
+            <div className="items-display " >
+            {inStock}
+  		       </div>
+      </div>
   	);
   }
 
