@@ -6,7 +6,7 @@ const Header = () => (
   <header className="header">
     <div className="content-container">
       <div className="header__content">
-    <h1 className="heade__title" >Ecknovation</h1>
+    <h1 className="heade__title" >Eckovation</h1>
   <div>
     <NavLink className="button button--link" to="/" activeClassName="is-active" exact={true}>Dashboard</NavLink>
     <NavLink className="button button--link" to="/cart" activeClassName="is-active">Cart</NavLink>
